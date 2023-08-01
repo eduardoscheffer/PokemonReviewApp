@@ -4,7 +4,7 @@ Alguma das tecnologias e padrões de desenvolvimento utilizadas no projeto:
 - C# como stack principal;
 - Visual Studio como IDE;
 - SQLServer Managment Studio como gerenciador do banco de dados;
-- EntityFramework para mapeamento dos objetos;
+- EntityFramework para mapeamento dos elementos base de dados para os elementos da aplicação;
 - Repository Patterns;
-- AutoMapper para mapeamento dos elementos base de dados para os elementos da aplicação;
+- AutoMapper para mapeamento de alguns objetos;
 - Injeção de Dependência
