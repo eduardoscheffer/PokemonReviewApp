@@ -3,6 +3,7 @@ using PokemonReviewApp.Data;
 using PokemonReviewApp;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Repository;
+using AutoMapper;
 
 internal class Program
 {
@@ -13,9 +14,10 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllers();
         // // Aqui, estamos dizendo que sempre que houver uma solicitação de IPokemonRepository, uma instância de PokemonRepository será criada e usada durante o escopo atual:
-        builder.Services.AddScoped<IPokemonRepository, PokemonRepository>(); // injecao de dependencia
+        builder.Services.AddScoped<IPokemonRepository, PokemonRepository>(); // injecao de dependencia. Registro da implementação do repositoy e sua interface
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<DataContext>(options =>
         {

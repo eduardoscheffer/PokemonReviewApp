@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
@@ -11,17 +12,21 @@ namespace PokemonReviewApp.Controllers
     public class PokemonController : Controller
     {
         private readonly IPokemonRepository _pokemonRepository;
+        private readonly IMapper _mapper;
 
-        public PokemonController(IPokemonRepository pokemonRepository) // chama o repositorio pro contexto do Controller
+        public PokemonController(IPokemonRepository pokemonRepository, IMapper mapper) // chama o repositorio pro contexto do Controller. chama o AutoMapper também
         {
             _pokemonRepository = pokemonRepository;
+            _mapper = mapper;
         }
 
         [HttpGet] // Get na Route
         [ProducesResponseType(200)]
         public IActionResult GetPokemons() 
         {
-            var pokemons = _pokemonRepository.GetPokemns(); // vai no repositorio e chama o metodo GetPokemons 
+            // usando AutoMapper para mapear (transformar um objeto de um tipo em outro):
+            // AutoMapper transforma uma List<Pokemon> em uma List<PokemonDto>:
+            var pokemons = _mapper.Map<List<PokemonDto>>(_pokemonRepository.GetPokemns()); // vai no repositorio e chama o metodo GetPokemons. Usando o AutoMapper vai retornar um PokemonDto
 
             if (!ModelState.IsValid) // se algo der errado
                 return BadRequest(ModelState);
@@ -36,7 +41,8 @@ namespace PokemonReviewApp.Controllers
             if (!_pokemonRepository.PokemonExists(pokeId))
                 return NotFound();
 
-            var pokemon = _pokemonRepository.GetPokemon(pokeId);
+            //            _mapper.Map<DestinationClass>(sourceObject);
+            var pokemon = _mapper.Map<PokemonDto>(_pokemonRepository.GetPokemon(pokeId));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
