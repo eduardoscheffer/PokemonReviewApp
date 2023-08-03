@@ -16,6 +16,7 @@ internal class Program
         // // Aqui, estamos dizendo que sempre que houver uma solicitação de IPokemonRepository, uma instância de PokemonRepository será criada e usada durante o escopo atual:
         builder.Services.AddScoped<IPokemonRepository, PokemonRepository>(); // injecao de dependencia. Registro da implementação do repositoy e sua interface
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+        builder.Services.AddScoped<ICountryRepository, CountryRepository>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
