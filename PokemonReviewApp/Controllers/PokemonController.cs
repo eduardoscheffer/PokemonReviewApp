@@ -7,8 +7,8 @@ using System.ComponentModel;
 
 namespace PokemonReviewApp.Controllers
 {
-    [Route("api/[controller]")] // passa a rota 
-    [ApiController] // diz que vai ser um controller
+        [Route("api/[controller]")] // passa a rota 
+        [ApiController] // diz que vai ser um controller
     public class PokemonController : Controller
     {
         private readonly IPokemonRepository _pokemonRepository;
